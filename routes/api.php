@@ -17,3 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Dev tools
+|--------------------------------------------------------------------------
+|
+*/
+Route::group([
+    'namespace'  => 'Dev',
+    'prefix'     => 'dev',
+], function ($router) {
+    require base_path('routes/dev.php');
+});

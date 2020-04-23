@@ -51,7 +51,7 @@ class DevController extends Controller
      * from:    ,
      * to:      => 'required|',
      */
-    public function getkeys(Request $request)
+    public function getKeys(Request $request)
     {
         return $request->keys();
     }
@@ -125,7 +125,6 @@ class DevController extends Controller
 
     public function store(Request $request)
     {
-        return 8;
         return $request->all();
     }
 
@@ -135,10 +134,10 @@ class DevController extends Controller
         $diff = array_diff($columns, ["id", "created_at", "updated_at"]);
         $values = array_values($diff);
         echo 'protected $fillable = ';
-        $this->print_r($values);
+        $this->print_array($values);
     }
 
-    private function print_r($array, $end = true)
+    private function print_array($array, $end = true)
     {
         echo '[';
         echo "\n";

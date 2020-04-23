@@ -31,3 +31,19 @@ Route::group([
 ], function ($router) {
     require base_path('routes/dev.php');
 });
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Api v1
+|--------------------------------------------------------------------------
+|
+*/
+Route::group([
+    'namespace'  => 'API',
+    'prefix'     => 'v1',
+], function ($router) {
+    require base_path('routes/api.v1.php');
+});
+

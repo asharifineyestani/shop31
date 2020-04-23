@@ -17,7 +17,7 @@ class CreateAttributesTable extends Migration
             $table->id();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('title');
-            $table->enum('type',['SELECT','STRING','ARRAY','BOOLEAN'])->default('STRING');
+            $table->enum('type',['SELECT','STRING','ARRAY','BOOLEAN','MULTI_SELECT'])->default('STRING');
             $table->boolean('is_filter')->default(false);
             $table->timestamps();
         });

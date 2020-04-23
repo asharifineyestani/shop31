@@ -5,6 +5,7 @@ Route::resource('/tests', 'TestController');
 
 
 Route::get('/columns/{table}', 'DevController@getTableColumns');
+Route::get('/columns/{table}/{type}', 'DevController@getTableColumns');
 Route::any('/keys', 'DevController@getkeys');
 
 

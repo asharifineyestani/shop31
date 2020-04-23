@@ -10,24 +10,33 @@ use Illuminate\Support\Facades\Schema;
 
 class DevController extends Controller
 {
+
+    public $columns;
+
     /**
+     * @param Request $request
      * @param $table
+     * @param null $type
      * @return mixed
      *
      * regex_resource
      * from: \"(.*)\",
      * to:   "$1" => \$this->$1,
-     *
-     *
      */
 
 
-
-
-
-    public function getTableColumns($table)
+    public function getTableColumns(Request $request, $table, $type = null)
     {
-        return DB::getSchemaBuilder()->getColumnListing($table);
+        $this->columns = DB::getSchemaBuilder()->getColumnListing($table);
+
+
+        switch ($type) {
+            case "fillable":
+                return $this->getFillable();
+                break;
+            default:
+                return $this->columns;
+        }
 
         // OR
 
@@ -104,22 +113,45 @@ class DevController extends Controller
     }
 
 
-
-
-
     public function uploadVideo($originalMedia)
     {
         $extension = $originalMedia->getClientOriginalExtension();
-        $name =  '_' . time() . '.' . $extension;
-        $path = public_path() ;
+        $name = '_' . time() . '.' . $extension;
+        $path = public_path();
         $originalMedia->move($path, $name);
 
         return $this->pathMedia . $name;
     }
 
-    public function store( Request $request)
+    public function store(Request $request)
     {
         return 8;
         return $request->all();
     }
+
+    private function getFillable()
+    {
+        $columns = $this->columns;
+        $diff = array_diff($columns, ["id", "created_at", "updated_at"]);
+        $values = array_values($diff);
+        echo 'protected $fillable = ';
+        $this->print_r($values);
+    }
+
+    private function print_r($array, $end = true)
+    {
+        echo '[';
+        echo "\n";
+        foreach ($array as $key => $value) {
+            echo '"';
+            echo $value;
+            echo '",';
+            echo "\n";
+        }
+        echo ']';
+
+        if ($end)
+            echo ";";
+    }
+
 }

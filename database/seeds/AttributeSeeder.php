@@ -15,7 +15,7 @@ class AttributeSeeder extends Seeder
                 'category_id' => 1,
                 'title' => 'OS',
                 'is_filter' => 1,
-                'type' => 'SELECT',
+                'type' => 'RADIO',
                 'options' =>
                     [
                         ['title' => 'android'],
@@ -27,7 +27,7 @@ class AttributeSeeder extends Seeder
                 'category_id' => 1,
                 'title' => 'RAM',
                 'is_filter' => 1,
-                'type' => 'SELECT',
+                'type' => 'RADIO',
                 'options' =>
                     [
                         ['title' => '2GB'],
@@ -39,7 +39,7 @@ class AttributeSeeder extends Seeder
                 'category_id' => 1,
                 'title' => 'camera',
                 'is_filter' => 0,
-                'type' => 'SELECT',
+                'type' => 'RADIO',
                 'options' =>
                     [
                         ['title' => '13mp'],
@@ -65,7 +65,7 @@ class AttributeSeeder extends Seeder
                 'category_id' => 1,
                 'title' => 'communication networks',
                 'is_filter' => 0,
-                'type' => 'MULTI_SELECT',
+                'type' => 'CHECKBOX',
                 'options' => [
                     ['title' => '3G'],
                     ['title' => '4G'],

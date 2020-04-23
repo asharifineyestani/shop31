@@ -5,6 +5,7 @@ namespace App\Casts;
 use App\Models\Option;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use \App\Models\Attribute;
+use Illuminate\Database\Eloquent\Model;
 
 class Detail implements CastsAttributes
 {
@@ -28,11 +29,11 @@ class Detail implements CastsAttributes
                 continue;
 
             switch ($attribute->type) {
-                case "SELECT":
+                case "RADIO":
                     if ($option = Option::find($value))
                         $details[$attribute->title] = $option->title;
                     break;
-                case "MULTI_SELECT":
+                case "CHECKBOX":
                     if (is_array($value))
                         foreach (Option::find($value) as $option)
                             $details[$attribute->title][] = $option->title;
@@ -56,7 +57,7 @@ class Detail implements CastsAttributes
     /**
      * Prepare the given value for storage.
      *
-     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param Model $model
      * @param string $key
      * @param array $value
      * @param array $attributes

@@ -14,4 +14,8 @@ class Attribute extends Model
         "is_filter"
     ];
 
+    public function options()
+    {
+        return $this->hasMany(Option::class);
+    }
 }

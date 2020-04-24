@@ -16,6 +16,7 @@ class CreateShopsTable extends Migration
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
             $table->foreignId('city_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->string('title');
             $table->string('avatar_path')->nullable();
             $table->text('shipping_policy')->nullable();

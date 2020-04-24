@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreignId('brand_id')->constrained()->onDelete('cascade')->nullable();
             $table->string('title');
+            $table->string('avatar_path')->nullable();
             $table->json('details')->nullable();
             $table->timestamps();
         });

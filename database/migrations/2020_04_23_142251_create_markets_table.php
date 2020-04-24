@@ -20,6 +20,7 @@ class CreateMarketsTable extends Migration
             $table->foreignId('color_id')->constrained()->onDelete('cascade')->nullable();
             $table->bigInteger('price');
             $table->integer('quantity');
+            $table->integer('discount_percent')->default(0);
             $table->timestamps();
         });
     }

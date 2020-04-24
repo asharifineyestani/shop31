@@ -11,4 +11,6 @@ class Option extends Model
         "attribute_id",
         "title"
     ];
+
+    protected $hidden = ['attribute_id'];
 }

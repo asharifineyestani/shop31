@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Casts\Detail;
 use App\Helpers\HasPagination;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -25,6 +26,8 @@ class Product extends Model
     protected $casts = [
         'details' => Detail::class
     ];
+
+    protected $appends = ['current_price', 'old_price', 'discount_percent'];
 
 
     public function brand()
@@ -57,5 +60,26 @@ class Product extends Model
         return $query;
     }
 
+    public function markets()
+    {
+        return $this->hasMany(Market::class)
+            ->orderBy(DB::raw('(price) - (price * discount_percent ) / 100'), 'ASC');
+    }
+
+
+    public function getCurrentPriceAttribute()
+    {
+        return  $this->markets()->first()->current_price;
+    }
+
+    public function getOldPriceAttribute()
+    {
+        return  $this->markets()->first()->old_price;
+    }
+
+    public function getDiscountPercentAttribute()
+    {
+        return  $this->markets()->first()->discount_percent;
+    }
 
 }

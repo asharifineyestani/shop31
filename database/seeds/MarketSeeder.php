@@ -15,6 +15,7 @@ class MarketSeeder extends Seeder
                 'color_id' => 1,
                 'price' => 1000,
                 'quantity' => 10,
+                'discount_percent' => 25
             ],
             [
                 'product_id' => 1,

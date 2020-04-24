@@ -27,7 +27,7 @@ class Product extends Model
         'details' => Detail::class
     ];
 
-    protected $appends = ['current_price', 'old_price', 'discount_percent'];
+    protected $appends = ['colors', 'current_price', 'old_price', 'discount_percent'];
 
 
     public function brand()
@@ -66,20 +66,37 @@ class Product extends Model
             ->orderBy(DB::raw('(price) - (price * discount_percent ) / 100'), 'ASC');
     }
 
+    public function getColorsAttribute($colors = [])
+    {
+        $select = ['id', 'name'];
+
+        $markets = $this->markets()
+            ->with(['color' => function ($query) use ($select) {
+                return $query->select($select);
+            }])
+            ->groupBy('color_id')
+            ->get();
+
+        foreach ($markets as $market) {
+            $colors[] = $market->color;
+        }
+
+        return $colors;
+    }
 
     public function getCurrentPriceAttribute()
     {
-        return  $this->markets()->first()->current_price;
+        return $this->markets()->first()->current_price;
     }
 
     public function getOldPriceAttribute()
     {
-        return  $this->markets()->first()->old_price;
+        return $this->markets()->first()->old_price;
     }
 
     public function getDiscountPercentAttribute()
     {
-        return  $this->markets()->first()->discount_percent;
+        return $this->markets()->first()->discount_percent;
     }
 
 }

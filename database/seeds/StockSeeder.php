@@ -1,14 +1,14 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \App\Models\Market;
 
-class MarketSeeder extends Seeder
+class StockSeeder extends Seeder
 {
+
 
     public function run()
     {
-        $markets = [
+        $stocks = [
             [
                 'product_id' => 1,
                 'shop_id' => 1,
@@ -59,7 +59,7 @@ class MarketSeeder extends Seeder
                 'color_id' => 2,
                 'price' => 1500,
                 'quantity' => 8,
-                'quantity' => 5,
+                'discount_percent' => 5,
             ],
             [
                 'product_id' => 2,
@@ -78,7 +78,7 @@ class MarketSeeder extends Seeder
 
         ];
 
-        foreach ($markets as $market)
-            Market::create($market);
+        foreach ($stocks as $stock)
+            \App\Models\Stock::create($stock);
     }
 }

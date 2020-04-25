@@ -60,9 +60,9 @@ class Product extends Model
         return $query;
     }
 
-    public function markets()
+    public function stocks()
     {
-        return $this->hasMany(Market::class)
+        return $this->hasMany(Stock::class)
             ->orderBy(DB::raw('(price) - (price * discount_percent ) / 100'), 'ASC');
     }
 
@@ -70,15 +70,15 @@ class Product extends Model
     {
         $select = ['id', 'name'];
 
-        $markets = $this->markets()
+        $stocks = $this->stocks()
             ->with(['color' => function ($query) use ($select) {
                 return $query->select($select);
             }])
             ->groupBy('color_id')
             ->get();
 
-        foreach ($markets as $market) {
-            $colors[] = $market->color;
+        foreach ($stocks as $stock) {
+            $colors[] = $stock->color;
         }
 
         return $colors;
@@ -86,17 +86,17 @@ class Product extends Model
 
     public function getCurrentPriceAttribute()
     {
-        return $this->markets()->first()->current_price;
+        return $this->stocks()->first()->current_price;
     }
 
     public function getOldPriceAttribute()
     {
-        return $this->markets()->first()->old_price;
+        return $this->stocks()->first()->old_price;
     }
 
     public function getDiscountPercentAttribute()
     {
-        return $this->markets()->first()->discount_percent;
+        return $this->stocks()->first()->discount_percent;
     }
 
 }

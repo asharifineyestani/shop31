@@ -13,4 +13,9 @@ class Option extends Model
     ];
 
     protected $hidden = ['attribute_id'];
+
+    public function attribute()
+    {
+        return $this->belongsTo(Attribute::class);
+    }
 }

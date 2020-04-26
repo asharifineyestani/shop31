@@ -11,4 +11,19 @@ class City extends Model
         "parent_id",
         "title"
     ];
+
+    public function parent()
+    {
+        return $this->belongsTo(Category::class,'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Category::class,'parent_id');
+    }
+
+    public function shops()
+    {
+        return $this->hasMany(Shop::class);
+    }
 }

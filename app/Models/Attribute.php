@@ -18,4 +18,9 @@ class Attribute extends Model
     {
         return $this->hasMany(Option::class);
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

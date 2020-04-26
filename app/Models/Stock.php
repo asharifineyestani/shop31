@@ -47,4 +47,9 @@ class Stock extends Model
     {
         return $this->belongsTo(Color::class);
     }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

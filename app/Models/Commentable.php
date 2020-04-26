@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Commentable extends Model
@@ -14,4 +15,9 @@ class Commentable extends Model
         "commentable_type",
         "commentable_id"
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

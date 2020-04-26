@@ -9,6 +9,10 @@ class CategorySeeder extends Seeder
     {
         $records = [
             [
+                'title' => 'کالای دیجینال',
+                'slug' => 'electronic-devices',
+            ],
+            [
                 'title' => 'Baby'
             ],
             [

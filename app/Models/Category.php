@@ -19,16 +19,29 @@ class Category extends Model
     ];
 
 
-
     public function filters()
     {
         return $this->hasMany(Attribute::class)->where('is_filter', 1)->with('options');
-
     }
+
 
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
 
+    public function parent()
+    {
+        return $this->belongsTo(Category::class,'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Category::class,'parent_id');
+    }
+
+    public function attributes()
+    {
+        return $this->hasMany(Attribute::class);
     }
 }

@@ -47,3 +47,18 @@ Route::group([
     require base_path('routes/api.v1.php');
 });
 
+
+
+/*
+|--------------------------------------------------------------------------
+| Admin
+|--------------------------------------------------------------------------
+|
+*/
+Route::group([
+    'namespace'  => 'Admin',
+    'prefix'     => 'v1/admin',
+], function ($router) {
+    require base_path('routes/admin.v1.php');
+});
+

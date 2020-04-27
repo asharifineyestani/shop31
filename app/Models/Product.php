@@ -68,6 +68,9 @@ class Product extends Model
 
     public function getColorsAttribute($colors = [])
     {
+        if (!$this->stocks()->first())
+            return null;
+
         $select = ['id', 'name'];
 
         $stocks = $this->stocks()
@@ -86,16 +89,22 @@ class Product extends Model
 
     public function getCurrentPriceAttribute()
     {
+        if (!$this->stocks()->first())
+            return null;
         return $this->stocks()->first()->current_price;
     }
 
     public function getOldPriceAttribute()
     {
+        if (!$this->stocks()->first())
+            return null;
         return $this->stocks()->first()->old_price;
     }
 
     public function getDiscountPercentAttribute()
     {
+        if (!$this->stocks()->first())
+            return null;
         return $this->stocks()->first()->discount_percent;
     }
 

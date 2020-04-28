@@ -19,6 +19,7 @@ class ProductResource extends JsonResource
             "title" => $this->title,
             "avatar_path" => $this->type,
             "details" => $this->details,
+            "in_stock" => $this->in_stock,
             "brand" => new BrandResource($this->whenLoaded('brand')),
             "category" => new CategoryResource($this->whenLoaded('category')),
         ];

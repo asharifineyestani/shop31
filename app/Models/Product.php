@@ -27,7 +27,7 @@ class Product extends Model
         'details' => Detail::class
     ];
 
-    protected $appends = ['colors', 'current_price', 'old_price', 'discount_percent'];
+    protected $appends = ['colors', 'current_price', 'old_price', 'discount_percent','in_stock'];
 
 
     public function brand()
@@ -68,7 +68,7 @@ class Product extends Model
 
     public function getColorsAttribute($colors = [])
     {
-        if (!$this->stocks()->first())
+        if (! $this->stocks()->first())
             return null;
 
         $select = ['id', 'name'];
@@ -89,23 +89,34 @@ class Product extends Model
 
     public function getCurrentPriceAttribute()
     {
-        if (!$this->stocks()->first())
+        if (! $stock = $this->stocks()->first())
             return null;
-        return $this->stocks()->first()->current_price;
+        return $stock->current_price;
     }
 
     public function getOldPriceAttribute()
     {
-        if (!$this->stocks()->first())
+        if (! $stock = $this->stocks()->first())
             return null;
-        return $this->stocks()->first()->old_price;
+        return $stock->old_price;
     }
 
     public function getDiscountPercentAttribute()
     {
-        if (!$this->stocks()->first())
-            return null;
-        return $this->stocks()->first()->discount_percent;
+        if (! $stock = $this->stocks()->first())
+            return false;
+
+        return $stock->discount_percent;
+    }
+
+
+
+    public function getInStockAttribute()
+    {
+        if (! $stock = $this->stocks()->first())
+            return false;
+
+        return ($stock->quantity > 0) ? true : false;
     }
 
 }

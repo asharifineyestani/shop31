@@ -16,7 +16,7 @@ class ProductController extends APIController
             ->limit(3);
 
 
-        $query = $query->hasPagination($request);
+        $query = $query->hasPagination($request)->hasPublicFilters($request);
 
         $query = $query->hasFilterAttribute($request->attribute);
 

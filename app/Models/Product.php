@@ -27,7 +27,7 @@ class Product extends Model
         'details' => Detail::class
     ];
 
-    protected $appends = ['colors', 'current_price', 'old_price', 'discount_percent','in_stock'];
+    protected $appends = ['colors', 'current_price', 'old_price', 'discount_percent', 'in_stock'];
 
 
     public function brand()
@@ -68,7 +68,7 @@ class Product extends Model
 
     public function getColorsAttribute($colors = [])
     {
-        if (! $this->stocks()->first())
+        if (!$this->stocks()->first())
             return null;
 
         $select = ['id', 'name'];
@@ -89,34 +89,55 @@ class Product extends Model
 
     public function getCurrentPriceAttribute()
     {
-        if (! $stock = $this->stocks()->first())
+        if (!$stock = $this->stocks()->first())
             return null;
         return $stock->current_price;
     }
 
     public function getOldPriceAttribute()
     {
-        if (! $stock = $this->stocks()->first())
+        if (!$stock = $this->stocks()->first())
             return null;
         return $stock->old_price;
     }
 
     public function getDiscountPercentAttribute()
     {
-        if (! $stock = $this->stocks()->first())
+        if (!$stock = $this->stocks()->first())
             return false;
 
         return $stock->discount_percent;
     }
 
 
-
     public function getInStockAttribute()
     {
-        if (! $stock = $this->stocks()->first())
+        if (!$stock = $this->stocks()->first())
             return false;
 
         return ($stock->quantity > 0) ? true : false;
+    }
+
+
+    public function scopeHasPublicFilters($query, $request)
+    {
+        if ($request->brand)
+            $query = $query->where('brand_id', $request->brand);
+
+        if ($request->colors)
+            $query = $query->whereIn('color_id', $request->colors);
+
+        if ($request->in_stock)
+            $query = $query->whereHas('stocks', function ($q) {
+                $q->where('quantity', '>', 0);
+            });
+
+        if ($request->price)
+            $query = $query->whereHas('stocks', function ($q) use ($request) {
+                $q->where('price', '<=', $request->price['max'])->where('price', '>=', $request->price['min']);
+            });
+
+        return $query;
     }
 
 }

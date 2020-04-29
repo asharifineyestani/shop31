@@ -62,3 +62,17 @@ Route::group([
     require base_path('routes/admin.v1.php');
 });
 
+
+/*
+|--------------------------------------------------------------------------
+| Admin
+|--------------------------------------------------------------------------
+|
+*/
+Route::group([
+    'namespace'  => 'Shop',
+    'prefix'     => 'v1/shop',
+], function ($router) {
+    require base_path('routes/shop.v1.php');
+});
+

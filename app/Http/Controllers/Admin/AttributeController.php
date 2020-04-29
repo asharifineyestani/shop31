@@ -16,7 +16,7 @@ class AttributeController extends Controller
         $attributeFields = $request->except('options');
         $optionsFields = $request->get('options');
 
-        $new_attribute = Attribute::create($attributeFields);
+        $newRow = Attribute::create($attributeFields);
 
 
         if (is_array($optionsFields))
@@ -24,9 +24,9 @@ class AttributeController extends Controller
                 $options[] = new Option(["title" => $optionFields]);
 
         if (isset($options) && count($options) > 0)
-            $new_attribute->options()->saveMany($options);
+            $newRow->options()->saveMany($options);
 
 
-        return new AttributeResource(Attribute::where('id', $new_attribute->id)->with('options')->first());
+        return new AttributeResource(Attribute::where('id', $newRow->id)->with('options')->first());
     }
 }

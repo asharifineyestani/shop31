@@ -31,3 +31,16 @@ Route::group([
 ], function ($router) {
     require base_path('routes/inc/dev.php');
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Dev tools
+|--------------------------------------------------------------------------
+|
+*/
+Route::group([
+    'namespace'  => 'Crud',
+], function ($router) {
+    require base_path('routes/inc/crud.php');
+});

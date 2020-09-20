@@ -19,18 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-/*
-|--------------------------------------------------------------------------
-| Dev tools
-|--------------------------------------------------------------------------
-|
-*/
-Route::group([
-    'namespace'  => 'Dev',
-    'prefix'     => 'dev',
-], function ($router) {
-    require base_path('routes/dev.php');
-});
 
 
 
@@ -44,7 +32,7 @@ Route::group([
     'namespace'  => 'API',
     'prefix'     => 'v1',
 ], function ($router) {
-    require base_path('routes/api.v1.php');
+    require base_path('routes/inc/api.v1.php');
 });
 
 
@@ -59,7 +47,7 @@ Route::group([
     'namespace'  => 'Admin',
     'prefix'     => 'v1/admin',
 ], function ($router) {
-    require base_path('routes/admin.v1.php');
+    require base_path('routes/inc/admin.v1.php');
 });
 
 
@@ -73,6 +61,6 @@ Route::group([
     'namespace'  => 'Shop',
     'prefix'     => 'v1/shop',
 ], function ($router) {
-    require base_path('routes/shop.v1.php');
+    require base_path('routes/inc/shop.v1.php');
 });
 

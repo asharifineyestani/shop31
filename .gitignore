@@ -12,5 +12,6 @@ npm-debug.log
 yarn-error.log
 /.idea
 /packages/
+/packages/*
 /public/afra/
 /resources/views/crud/fields/inc/

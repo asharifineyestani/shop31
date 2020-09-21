@@ -13,14 +13,29 @@ class Product extends Model
 
 
     protected $fillable = [
+        "avatar_path",
         "category_id",
         "brand_id",
         "title",
         "details",
+
     ];
 
 
-    protected $hidden = ['category_id', 'brand_id'];
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->category_id = 1;
+            $model->brand_id = 1;
+            $model->details = "{}";
+        });
+    }
+
+
+
+//    protected $hidden = ['category_id', 'brand_id'];
 
 
     protected $casts = [
@@ -60,11 +75,13 @@ class Product extends Model
         return $query;
     }
 
+
     public function stocks()
     {
         return $this->hasMany(Stock::class)
             ->orderBy(DB::raw('(price) - (price * discount_percent ) / 100'), 'ASC');
     }
+
 
     public function getColorsAttribute($colors = [])
     {
@@ -87,6 +104,7 @@ class Product extends Model
         return $colors;
     }
 
+
     public function getCurrentPriceAttribute()
     {
         if (!$stock = $this->stocks()->first())
@@ -94,12 +112,14 @@ class Product extends Model
         return $stock->current_price;
     }
 
+
     public function getOldPriceAttribute()
     {
         if (!$stock = $this->stocks()->first())
             return null;
         return $stock->old_price;
     }
+
 
     public function getDiscountPercentAttribute()
     {
@@ -139,5 +159,6 @@ class Product extends Model
 
         return $query;
     }
+
 
 }

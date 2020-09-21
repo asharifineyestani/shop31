@@ -18,6 +18,9 @@ class UserController extends CrudController
     public function setupIndex()
     {
         $this->crud->setColumn('id');
+        $this->crud->setColumn('name');
+        $this->crud->setColumn('email');
+        $this->crud->setColumn('action');
 
     }
 

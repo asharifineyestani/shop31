@@ -11,7 +11,8 @@ class Stock extends Model
         "shop_id",
         "color_id",
         "price",
-        "quantity"
+        "quantity",
+        "discount_percent"
     ];
 
 
@@ -23,10 +24,8 @@ class Stock extends Model
 
     public function getOldPriceAttribute()
     {
-        if ($this->discount_percent)
-            return $this->price;
 
-        return null;
+        return $this->price;
 
     }
 
@@ -52,5 +51,17 @@ class Stock extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->shop_id = 1;
+            $model->color_id = 1;
+        });
     }
 }

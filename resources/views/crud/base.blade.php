@@ -53,6 +53,8 @@
     </script>
     <link href="/afra/vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
     <link href="https://unpkg.com/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css" rel="stylesheet">
+    <link href="{{ asset('crud/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('crud/select2-bootstrap-theme/dist/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
 
 
     <style>
@@ -109,6 +111,7 @@
 <script src="/afra/vendors/@coreui/icons/js/svgxuse.min.js"></script>
 <script src="/afra/vendors/@coreui/utils/js/coreui-utils.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="{{ asset('crud/select2/dist/js/select2.full.min.js') }}"></script>
 @yield('script')
 
 </body>

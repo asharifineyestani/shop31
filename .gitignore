@@ -16,3 +16,6 @@ yarn-error.log
 /public/afra/
 /resources/views/crud/fields/inc/
 /public/crud/
+/public/css/app.css
+/public/js/app.js
+/public/js/app.js.LICENSE.txt

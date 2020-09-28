@@ -82,7 +82,6 @@
     </style>
 
 
-
     @yield('style')
 </head>
 <body class="c-app">
@@ -90,7 +89,7 @@
 <div class="c-wrapper c-fixed-components">
     @include('crud.partials.header')
     <div class="c-body">
-        <main class="c-main">
+        <main class="c-main" id="main">
             <div class="container-fluid">
                 <div class="fade-in">
                 @yield('content')
@@ -110,8 +109,11 @@
 <script src="/afra/vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
 <script src="/afra/vendors/@coreui/icons/js/svgxuse.min.js"></script>
 <script src="/afra/vendors/@coreui/utils/js/coreui-utils.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
 <script src="{{ asset('crud/select2/dist/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 @yield('script')
 
 </body>

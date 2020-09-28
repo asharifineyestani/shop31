@@ -14,9 +14,9 @@
     <ul class="c-header-nav ml-auto mr-4">
         <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#"
                                                   role="button" aria-haspopup="true" aria-expanded="false">
-                <div class="c-avatar"><img class="c-avatar-img" src="{{asset(auth()->user()->avatar)}}"
+                <div class="c-avatar"><img class="c-avatar-img" src="{{asset(auth()->user()->avatar ?? '')}}"
                                            alt="user@email.com"
-                                           title="{{auth()->user()->first_name.' '.auth()->user()->last_name}}"></div>
+                                           title="{{auth()->user()->name ?? ''}}"></div>
             </a>
             <div class="dropdown-menu dropdown-menu-right pt-0">
                 <div class="dropdown-header bg-light py-2"><strong>پنل کاربری</strong></div>

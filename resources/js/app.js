@@ -21,8 +21,8 @@ window.Vue = require('vue');
 
 
 Vue.component(
-    'example-component',
-    require('./components/ExampleComponent.vue').default
+    'options-table',
+    require('./components/OptionsTable.vue').default
 );
 
 /**

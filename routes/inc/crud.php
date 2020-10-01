@@ -17,3 +17,4 @@ Route::resource('pages', 'PageController');
 Route::resource('brands', 'BrandController');
 Route::resource('categories', 'CategoryController');
 Route::resource('stocks', 'StockController');
+Route::resource('attributes', 'AttributeController');

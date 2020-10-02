@@ -25,6 +25,12 @@ Vue.component(
     require('./components/OptionsTable.vue').default
 );
 
+
+Vue.component(
+    'attributes-table',
+    require('./components/AttributeTable.vue').default
+);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

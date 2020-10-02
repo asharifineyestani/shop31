@@ -42,6 +42,11 @@ class CategoryController extends CrudController
             'name' => 'body'
         ]);
 
+        $this->crud->setField([
+            'type' => 'attributes-table',
+            'name' => 'attributes',
+        ]);
+
     }
 
 

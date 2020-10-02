@@ -2,7 +2,7 @@
     <div>
         <table class="table table-responsive-sm">
             <tbody>
-            <tr v-for="item in data.options">
+            <tr v-for="item in data">
 
                 <template v-if="editRow.id == item.id">
                     <td>{{item.id}}</td>
@@ -115,7 +115,7 @@
 
             get() {
                 axios
-                    .get('http://127.0.0.1:8000/attributes/' + this.entityId)
+                    .get('/api/v1/shop/options?filters[attribute_id]=' + this.entityId)
                     .then(response => (this.data = response.data))
             },
 
@@ -124,7 +124,7 @@
             },
             update(item) {
                 axios
-                    .put('http://127.0.0.1:8000/api/v1/shop/options/' + item.id, this.editRow)
+                    .put('/api/v1/shop/options/' + item.id, this.editRow)
 
 
                 this.reset()
@@ -133,14 +133,14 @@
             store() {
                 this.newRow.attribute_id = this.entityId;
                 axios
-                    .post('http://127.0.0.1:8000/api/v1/shop/options/', this.newRow)
+                    .post('/api/v1/shop/options/', this.newRow)
 
                 this.reset()
             },
 
             destroy(item) {
                 axios
-                    .delete('http://127.0.0.1:8000/api/v1/shop/options/' + item.id)
+                    .delete('/api/v1/shop/options/' + item.id)
 
                 this.reset()
             },

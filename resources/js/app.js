@@ -20,6 +20,11 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 
+import vSelect from 'vue-select'
+
+Vue.component('v-select', vSelect)
+import 'vue-select/dist/vue-select.css';
+
 Vue.component(
     'options-table',
     require('./components/OptionsTable.vue').default

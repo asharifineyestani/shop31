@@ -21,6 +21,7 @@ class Detail implements CastsAttributes
         $attributes = json_decode($value, true);
 
 
+
         foreach ($attributes as $key => $value) {
 
             $attribute = Attribute::find($key);
@@ -29,16 +30,16 @@ class Detail implements CastsAttributes
                 continue;
 
             switch ($attribute->type) {
-                case "RADIO":
+                case "select":
                     if ($option = Option::find($value))
                         $details[$attribute->title] = $option->title;
                     break;
-                case "CHECKBOX":
+                case "multiple-select":
                     if (is_array($value))
                         foreach (Option::find($value) as $option)
                             $details[$attribute->title][] = $option->title;
                     break;
-                case "BOOLEAN":
+                case "boolean":
                     if ($value)
                         $details[$attribute->title] = 'Yes';
                     else

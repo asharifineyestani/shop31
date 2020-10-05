@@ -24,7 +24,7 @@ class AttributeController extends Controller
     public function update(Request $request , $id)
     {
 
-        return Attribute::where('id',$id)->update($request->only('title'));
+        return Attribute::where('id',$id)->update($request->only('title','type'));
     }
 
 

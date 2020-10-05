@@ -8,6 +8,14 @@
                     <td>{{item.id}}</td>
                     <td><input v-model="editRow.title" type="text"></td>
                     <td>
+                        <v-select
+                            v-model="editRow.type"
+                            taggable
+                            push-tags
+                            :options="attributeTypes"
+                        ></v-select>
+                    </td>
+                    <td>
                         <button
                             class="btn btn-sm btn-success"
                             type="button"
@@ -28,8 +36,10 @@
                     <td>{{item.id}}</td>
                     <td>
                         <a :href="'/attributes/' + item.id +  '/edit'">{{item.title}}</a>
-
                     </td>
+
+
+                    <td>{{item.type}}</td>
                     <td>
 
                         <div v-if="Object.keys(editRow).length === 0 && creatInput === false">
@@ -74,6 +84,15 @@
                     <input class="form-control" v-model="newRow.title" type="text" placeholder="Enter your name">
 
                 </td>
+
+                <td>
+                    <v-select
+                        v-model="newRow.type"
+                        taggable
+                        push-tags
+                        :options="attributeTypes"
+                    ></v-select>
+                </td>
                 <td>
                     <button
                         class="btn btn-sm btn-success"
@@ -103,6 +122,7 @@
     export default {
         data() {
             return {
+                attributeTypes : [],
                 data: [],
                 editRow: {},
                 newRow: {},
@@ -120,6 +140,11 @@
                 axios
                     .get('/api/v1/shop/attributes?filters[category_id]=' + this.entityId)
                     .then(response => (this.data = response.data))
+
+
+                axios
+                    .get('/api/v1/shop/config')
+                    .then(response => (this.attributeTypes = response.data.attributeTypes))
             },
 
             onEdit(product) {

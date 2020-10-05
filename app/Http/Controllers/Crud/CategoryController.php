@@ -43,8 +43,8 @@ class CategoryController extends CrudController
         ]);
 
         $this->crud->setField([
-            'type' => 'attributes-table',
-            'name' => 'attributes',
+            'name' => 'attributes-table',
+            'type' => 'vue-component',
         ]);
 
     }

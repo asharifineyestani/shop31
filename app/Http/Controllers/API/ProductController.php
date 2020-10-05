@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\APIController;
-use App\Http\Controllers\Controller;
+use App\Http\Resources\Shop\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -18,7 +18,7 @@ class ProductController extends APIController
 
         $query = $query->hasPagination($request)->hasPublicFilters($request);
 
-        $query = $query->hasFilterAttribute($request->attribute);
+        $query = $query->hasFilterAttribute($request);
 
 
         return $query->get();
@@ -33,7 +33,9 @@ class ProductController extends APIController
 
     public function show($id)
     {
-        return $query = Product::find($id);
+         $query = Product::find($id);
 
+
+        return new ProductResource($query);
     }
 }

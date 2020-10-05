@@ -13,10 +13,10 @@
                             @include('crud::partials.alert')
                             <form method="POST" action="{{$crud->route('store')}}">
                                 @csrf
-                                <div class="row">
+
                                     <product-form></product-form>
 
-                                </div>
+
                             </form>
                         </div>
                     </div>

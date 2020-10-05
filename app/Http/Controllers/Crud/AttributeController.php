@@ -32,13 +32,28 @@ class AttributeController extends CrudController
 
     public function setupCreate()
     {
+        $options = [];
+
+        foreach (Attribute::getPossibleEnumValues('type') as $type) {
+            $options[$type] = $type;
+
+        }
+
+
         $this->crud->setField([
             'name' => 'title'
         ]);
 
+
         $this->crud->setField([
-            'type' => 'options-table',
-            'name' => 'options',
+            'name' => 'type',
+            'type' => 'select2',
+            'options' => $options,
+        ]);
+
+        $this->crud->setField([
+            'name' => 'options-table',
+            'type' => 'vue-component',
         ]);
 
     }

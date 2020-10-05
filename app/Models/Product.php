@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\Detail;
+use App\Casts\Json;
 use App\Helpers\HasPagination;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +24,7 @@ class Product extends Model
 
 
     protected $casts = [
-        'details' => Detail::class
+        'details' => Json::class,
     ];
 
 
@@ -59,10 +60,7 @@ class Product extends Model
         }
 
 
-        $attributes = $request->get('att');
-
-
-        foreach ($attributes as $key => $value) {
+        foreach ($request->get('att') ?? [] as $key => $value) {
             if (is_array($value))
                 foreach ($value as $k => $v)
                     $query = $query->orWhereJsonContains('details->' . $key, option($v));

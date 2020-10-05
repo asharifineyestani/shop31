@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attribute extends Model
 {
-    //
+
+    use Enum;
+
+
     protected $fillable = [
         "category_id",
         "title",

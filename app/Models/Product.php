@@ -22,25 +22,10 @@ class Product extends Model
     ];
 
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            $model->category_id = 1;
-            $model->brand_id = 1;
-            $model->details = "{}";
-        });
-    }
-
-
-
-//    protected $hidden = ['category_id', 'brand_id'];
-
-
     protected $casts = [
         'details' => Detail::class
     ];
+
 
     protected $appends = ['colors', 'current_price', 'old_price', 'discount_percent', 'in_stock'];
 
@@ -57,20 +42,35 @@ class Product extends Model
     }
 
 
-    public function scopeHasFilterAttribute($query, $attributes)
+    public function scopeHasFilterAttribute($query, $request)
     {
-        if ($attributes)
-            foreach ($attributes as $key => $value) {
-                if (is_array($value)) {
-                    $query = $query->whereJsonContains('details->' . $key, (int)$value[0]);
-                    if (count($value) > 0)
-                        for ($i = 1; $i < count($value); $i++) {
-                            $query = $query->orWhereJsonContains('details->' . $key, (int)$value[$i]);
-                        }
-                } else
-                    $query = $query->where('details->' . $key, $value);
 
-            }
+
+        function option($value)
+        {
+
+            if (!is_numeric($value))
+                return $value;
+
+
+            $options = Option::where('id', $value)->first();
+            if ($options)
+                return $options->title;
+        }
+
+
+        $attributes = $request->get('att');
+
+
+        foreach ($attributes as $key => $value) {
+            if (is_array($value))
+                foreach ($value as $k => $v)
+                    $query = $query->orWhereJsonContains('details->' . $key, option($v));
+            else
+                $query = $query->whereJsonContains('details->' . $key, option($value));
+
+
+        }
 
         return $query;
     }
@@ -135,7 +135,7 @@ class Product extends Model
         if (!$stock = $this->stocks()->first())
             return false;
 
-        return ($stock->quantity > 0) ? true : false;
+        return $stock->quantity > 0;
     }
 
 

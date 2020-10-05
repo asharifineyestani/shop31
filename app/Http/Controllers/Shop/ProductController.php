@@ -31,6 +31,12 @@ class ProductController extends APIController
     }
 
 
+    public function update(Request $request , $id)
+    {
+        return Product::where('id' , $id)->update($request->except('details_view'));
+    }
+
+
     public function show($id)
     {
         return $query = Product::find($id);

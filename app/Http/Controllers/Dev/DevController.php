@@ -22,6 +22,10 @@ class DevController extends Controller
      * regex_resource
      * from: \"(.*)\",
      * to:   "$1" => \$this->$1,
+     *
+     * regex_resource
+     * from: ,\s*\'(.*)@(.*)\'
+     * to:   ,[$1::class,'$2']
      */
 
 

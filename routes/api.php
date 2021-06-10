@@ -20,8 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Api v1
@@ -29,7 +27,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 |
 */
 Route::group([
-    'namespace'  => 'API',
     'prefix'     => 'v1',
 ], function ($router) {
     require base_path('routes/inc/api.v1.php');
@@ -44,7 +41,6 @@ Route::group([
 |
 */
 Route::group([
-    'namespace'  => 'Admin',
     'prefix'     => 'v1/admin',
 ], function ($router) {
     require base_path('routes/inc/admin.v1.php');
@@ -58,9 +54,7 @@ Route::group([
 |
 */
 Route::group([
-    'namespace'  => 'Shop',
     'prefix'     => 'v1/shop',
 ], function ($router) {
     require base_path('routes/inc/shop.v1.php');
 });
-

@@ -6,13 +6,13 @@
 |--------------------------------------------------------------------------
 */
 
-Route::post('stocks', 'StockController@store');
+Route::post('stocks',[\App\Http\Controllers\Shop\StockController::class,'store']);
 
-Route::resource('options', 'OptionController');
-Route::resource('products', 'ProductController');
-Route::resource('attributes', 'AttributeController');
+Route::resource('options', \App\Http\Controllers\Shop\OptionController::class);
+Route::resource('products', \App\Http\Controllers\Shop\ProductController::class);
+Route::resource('attributes', \App\Http\Controllers\Shop\AttributeController::class);
 
 
 
-Route::get('config', 'ConfigController@index');
+Route::get('config',[\App\Http\Controllers\Shop\ConfigController::class,'index']);
 

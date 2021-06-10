@@ -11,17 +11,19 @@ class ProductController extends APIController
 {
     public function index(Request $request)
     {
-        $query = Product::select('*')
-            ->with(['brand', 'category'])
-            ->limit(3);
 
-
-        $query = $query->hasPagination($request)->hasPublicFilters($request);
-
-        $query = $query->hasFilterAttribute($request->attribute);
-
-
-        return $query->get();
+        return Product::all();
+//        $query = Product::select('*')
+//            ->with(['brand', 'category'])
+//            ->limit(3);
+//
+//
+//        $query = $query->hasPagination($request)->hasPublicFilters($request);
+//
+//        $query = $query->hasFilterAttribute($request);
+//
+//
+//        return $query->get();
     }
 
 

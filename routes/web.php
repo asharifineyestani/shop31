@@ -18,7 +18,6 @@ Route::get('/', function () {
 });
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Dev tools
@@ -39,8 +38,9 @@ Route::group([
 |--------------------------------------------------------------------------
 |
 */
-Route::group([
-    'namespace'  => 'Crud',
-], function ($router) {
-    require base_path('routes/inc/crud.php');
-});
+//Route::group([
+//    'namespace'  => 'Crud',
+//    'prefix' => config('crud.base.prefix'),
+//], function ($router) {
+//    require base_path('routes/inc/crud.php');
+//});

@@ -1,12 +1,12 @@
 <?php
 
 
-Route::resource('/tests', 'TestController');
+Route::resource('/tests', \App\Http\Controllers\Dev\TestController::class);
 
 
-Route::get('/columns/{table}', 'DevController@getTableColumns');
-Route::get('/columns/{table}/{type]}', 'DevController@getTableColumns');
-Route::any('/keys', 'DevController@getKeys');
+Route::get('/columns/{table}',[\App\Http\Controllers\Dev\DevController::class,'getTableColumns']);
+Route::get('/columns/{table}/{type]}',[\App\Http\Controllers\Dev\DevController::class,'getTableColumns']);
+Route::any('/keys',[\App\Http\Controllers\Dev\DevController::class,'getKeys']);
 
 
 
